@@ -1,0 +1,17 @@
+using System;
+
+namespace ProblemOne
+{
+    class Program
+    {
+        static void Main()
+        {
+            var maxNumb = 1000;
+            var sum = 0;
+            for (int i = 1; i < maxNumb; i++)
+                if (i % 3 == 0 || i % 5 == 0)
+                    sum += i;
+            Console.WriteLine(sum);
+        }
+    }
+}
