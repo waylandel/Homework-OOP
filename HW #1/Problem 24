@@ -1,0 +1,48 @@
+using System;
+
+namespace Homework
+{
+    class Problem24
+    {
+        static void Main(string[] args)
+        {
+            var sequence = new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            for (int item = 0; item < 999999; item++)
+            {
+                    FindNextPermutation(sequence);
+            }
+            foreach (var e in sequence)
+                Console.Write(e);
+        }
+
+        private static void FindNextPermutation(int[] sequence)
+        {
+            int maxItem = int.MinValue;
+            for (int item = sequence.Length - 1; item > 0; item--)
+            {
+                if (sequence[item] > sequence[item - 1])
+                {
+                    maxItem = item - 1;
+                    break;
+                }
+                if (item == 1) return;
+            }
+            for (int j = sequence.Length - 1; j >= 0; j--)
+            {
+                if (j > maxItem && sequence[maxItem] < sequence[j])
+                {
+                    var tempItem = sequence[maxItem];
+                    sequence[maxItem] = sequence[j];
+                    sequence[j] = tempItem;
+                    break;
+                }
+            }
+            for (int i = maxItem + 1; i < maxItem + 1 + ((sequence.Length - maxItem + 1) / 2) - 1; i++)
+            {
+                var tempItem = sequence[i];
+                sequence[i] = sequence[sequence.Length - i - 1 + maxItem + 1];
+                sequence[sequence.Length - i - 1 + maxItem + 1] = tempItem;
+            }
+        }
+    }
+}
